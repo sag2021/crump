@@ -10,6 +10,14 @@ has a Python frontend.
 
 This code was written as a quick way to perform a specific calculation, so it's not particularly versatile. 
 
+# Neumann boundary conditions 
+
+When the normal component is specified on all boundaries, the scalar potential, u, is only unique up to a constant. Hence, CRUMP enforces the additional
+condition mean(u) = 0 in the volume, which resolves this ambiguity. This choice doesn't affect the magnetic field. 
+
+In addition, when B normal is fixed on all the boundaries, an additional compatibility condition comes into play. Specifically, the net magnetic 
+flux must balance when integrated over all six faces of the box. If this isn't the case, then div(B) = 0 can't be achieved in the volume. 
+
 # Code details
 
 The code takes a given magnetic field, B,in a Cartesian box and computes a potential field based on the value of the normal component of B on each of the six boundaries.  
