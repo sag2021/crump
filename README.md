@@ -25,8 +25,7 @@ The code takes a given magnetic field, B,in a Cartesian box and computes a poten
 It returns both the magnetic field and the magnetic scalar potential. Everything is computed in non-dimensional units. 
 
 The calculation is performed using a second-order-finite-difference scheme. Successive Over-Relaxation (SOR) is used to solve the finite-difference system. 
-Hence, the truncation error should scaled as E ~ h^2, where h is the mesh spacing. The run time will scale as t ~ N^4, where N is the number of mesh
-points in a given dimension (and therefore N^3 in total). 
+Hence, the truncation error should scaled as E ~ h^2, where h is the mesh spacing. The run time will scale as t ~ N^4, where N is the number of mesh points in a given dimension (and therefore N^3 in total). 
 
 The Fortran backend is written in Fortran 2003 and parallelized for shared memory parallel computers using OpenMP. 
 
