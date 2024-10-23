@@ -1,12 +1,14 @@
 # Overview 
 
-Checkerboard Relaxation Method Used for Potential field reconstructions (CRUMP). Module computes a magnetic potential field in a Cartesian domain from the normal component of B on the six planar boundaries.
-The magnetic field is found from the gradient of a scalar potential using a checkerboard successive over-relaxation method for the solution of Laplace's equation. The code has a Python frontend
+Checkerboard Relaxation Method Used for Potential field reconstructions (CRUMP). The code computes the magnetic potential field that matches the normal component of a given magnetic field
+on the six planar boundaries of a Cartesian box. The magnetic field is found from the gradient of a scalar potential using a checkerboard Successive Over-Relaxation (SOR) method for the solution of Laplace's equation. The code has a Python frontend
 and Fortran backend. 
 
 A previous version of this code was used in Mastrano, A., Wheatland, M.S., and Gilchrist, S.A.:2018, Solar Physics,293,130 (doi:10.1007/s11207-018-1351-0).
 The differences between this version and that one are superficial. The original was designed to be called from IDL, whereas this version
 has a Python frontend. 
+
+More information on the method of SOR in general can be found in most text books on numerical methods e.g. Press et al. Numerical Recipes 3rd Edition: The Art of Scientific Computing.
 
 This code was written as a quick way to perform a specific calculation, so it's not particularly versatile. 
 
@@ -33,10 +35,25 @@ The Fortran backend is written in Fortran 2003 and parallelized for shared memor
 
 First compile the shared library. This has been tested under gfortran. 
 
-See the test.py script for how to use the Python frontend. 
+See the test.py script for how to use the Python frontend and the docstring for crump.solve. 
+
 
 # Mesh
 
-The mesh must span the unit box [0,1]x[0,1]x[0,1] and be uniform, i.e. dx=dy=dz. 
+The mesh spacing is assumed to be uniform, i.e. dx=dy=dz. The mesh spacing is not passed as an argument, instead dx is inferred from the array shape
+as dx = 1/(nx-1), where nx = shape[-1]. In other words, the domain is always assumed to have a non-dimensional length of 1 in the x direction. This
+assumption is pretty restrictive, but the code was designed to solve one particular problem on a uniform mesh. 
+
+# REAL and INTEGER types
+
+There are three basic types used by CRUMP: REAL(FP),INTEGER(IT), and INTEGER(C_INT). 
+The former two are used in calculations. They may be set in the CRUMP_MOD module. By default they 
+are C_DOUBLE and C_INT64_T.Setting these to different types (e.g. single or long_double) won't break the Fortran module, but
+CRUMP can no longer be called by the Python module: crump.py expects double and int64.
+
+Some integers are also C_INT. These correspond to positions in the options vector and function return types indended to be
+called from Python. 
+
+
 
 
