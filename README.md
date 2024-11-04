@@ -4,12 +4,14 @@ Checkerboard Relaxation Method Used for Potential field reconstructions (CRUMP).
 on the boundary. The domain is a Cartesian box and the boundary is the six planar faces of the box. For a fixed normal component, the potential field represents a minimum energy state 
 for the magnetic field. The potential magnetic field is found from the gradient of a scalar potential using a checkerboard Successive Over-Relaxation (SOR) method for the solution of Laplace's equation. The code has a Python frontend and Fortran backend. This code was written as a quick way to perform a specific calculation, so it's not particularly versatile. 
 
-A previous version of this code was used in Mastrano, A., Wheatland, M.S., and Gilchrist, S.A.:2018, Solar Physics,293,130 (doi:10.1007/s11207-018-1351-0).
+A previous version of this code was used in Mastrano, Wheatland, and Gilchrist (2018)[^1].
 The difference between this version and that one is superficial. The original was designed to be called from IDL, whereas this version
 has a Python frontend. 
 
-More information on the method of SOR in general can be found in most text books on numerical methods e.g. Press et al. Numerical Recipes 3rd Edition: The Art of Scientific Computing.
+More information on the method of SOR in general can be found in most text books on numerical methods e.g. Press et al. [^2].
 
+[^1]: Mastrano, A., Wheatland, M.S., and Gilchrist, S.A.:2018, Solar Physics,293,130 (doi:10.1007/s11207-018-1351-0).
+[^2]: Press, W.H. Teukolsky, S.A., Vetterling, W.T., Flannery, B.P.: 2007,Numerical Recipes 3rd Edition: The Art of Scientific Computing,Cambridge University Press,ISBN:9780521880688
 
 # Neumann boundary conditions 
 
