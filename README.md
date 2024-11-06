@@ -16,18 +16,18 @@ More information on the method of SOR in general can be found in most text books
 # Neumann boundary conditions 
 
 When the normal component is specified on all boundaries, the scalar potential, u, is only unique up to a constant. Hence, CRUMP enforces the additional
-condition $\mbox{mean}(u) = 0$ in the volume, which resolves this ambiguity. This choice doesn't affect the magnetic field. 
+condition $\langle u \rangle = 0$ in the volume, which resolves this ambiguity. This choice doesn't affect the magnetic field. 
 
-In addition, when B normal is fixed on all the boundaries, an additional compatibility condition comes into play. Specifically, the net magnetic 
+In addition, when $\mathbf B$ normal is fixed on all the boundaries, an additional compatibility condition comes into play. Specifically, the net magnetic 
 flux must balance when integrated over all six faces of the box. If this isn't the case, then $\nabla\cdot\mathbf B = 0$ can't be achieved in the volume. 
 
 # Code details
 
-The code takes a given magnetic field, B,in a Cartesian box and computes a potential field based on the value of the normal component of B on each of the six boundaries.  
+The code takes a given magnetic field, $\mathbf B$,in a Cartesian box and computes a potential field based on the value of the normal component of B on each of the six boundaries.  
 It returns both the magnetic field and the magnetic scalar potential. Everything is computed in non-dimensional units. 
 
 The calculation is performed using a second-order-finite-difference scheme. Successive Over-Relaxation (SOR) is used to solve the finite-difference system. 
-Hence, the truncation error should scaled as $E \sim h^2$, where $h$ is the mesh spacing. The run time will scale as $t \sim N^4$, where $N$ is the number of mesh points in a given dimension (and therefore N^3 in total). 
+Hence, the truncation error should scaled as $E \sim h^2$, where $h$ is the mesh spacing. The run time will scale as $t \sim N^4$, where $N$ is the number of mesh points in a given dimension (and therefore $N^3$ in total). 
 
 The Fortran backend is written in Fortran 2003 and parallelized for shared memory parallel computers using OpenMP. 
 
